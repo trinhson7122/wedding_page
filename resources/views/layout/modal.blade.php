@@ -57,7 +57,7 @@
     </div>
     {{-- product --}}
     <div id="add-product-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-        <div class="modal-dialog" id="product-load">
+        <div class="modal-dialog">
             <div class="modal-content">
 
                 <div class="modal-body">
@@ -65,11 +65,11 @@
                         <h3>Thêm sản phẩm</h3>
                     </div>
 
-                    <form class="pl-3 pr-3" action="#">
-
+                    <form class="pl-3 pr-3" action="{{ route('admin.store-product') }}" method="post">
+                        @csrf
                         <div class="form-group">
                             <label for="nameproduct">Tên sản phẩm</label>
-                            <input class="form-control" type="text" id="nametype" required=""
+                            <input class="form-control" type="text" name="name" required=""
                                 placeholder="ví dụ: hoa, ...">
                         </div>
 
@@ -87,7 +87,7 @@
                                 </option>
                             @endforeach
                             </select>
-                            <input type="hidden" name="id_type" value="{{ $types->first()->id }}">
+                            <input type="hidden" name="id_type" value="1" value="{{ $types->first()->id }}">
                         </div>
 
                         <div class="form-group form-category">
@@ -104,27 +104,21 @@
                                 </option>
                             @endforeach
                             </select>
-                            <input type="hidden" name="id_category" value="
-                            @if($categories->count() > 0)
-                                {{ $categories->first()->id }}
-                            @else
-                                0
-                            @endif
-                            ">
+                            <input type="hidden" name="id_category" value="1" value="{{ $categories->first()->id }}">
                         </div>
 
                         <div class="form-group">
                             <label for="priceproduct">Giá tiền</label>
-                            <input class="form-control" type="number" id="priceproduct" required="" value="100000">
+                            <input class="form-control" type="number" name="price" required="" value="100000">
                         </div>
 
                         <div class="form-group">
                             <label for="note">Ghi chú</label>
-                            <input class="form-control" type="text" id="note" required="">
+                            <input class="form-control" type="text" name="note">
                         </div>
 
                         <div class="form-group text-center">
-                            <button class="btn btn-primary" type="submit">Thêm</button>
+                            <button class="btn btn-primary" id="add-product" type="button">Thêm</button>
                         </div>
 
                     </form>

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeCategoryProductController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
@@ -21,4 +22,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::get('/', [TypeCategoryProductController::class, 'index'])->name('index');
     Route::post('/store-type', [TypeController::class, 'store'])->name('store-type');
     Route::post('/store-category', [CategoryController::class, 'store'])->name('store-category');
+    Route::post('/store-product', [ProductController::class, 'store'])->name('store-product');
 });

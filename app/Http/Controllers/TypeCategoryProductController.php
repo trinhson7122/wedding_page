@@ -19,7 +19,7 @@ class TypeCategoryProductController extends Controller
     {
         $types = Type::query()->get();
         $categories = Category::query()->get();
-        //dd($type->first()->id);
+        //dd($categories->first());
         return view('admin.index', [
             'types' => $types,
             'categories' => $categories,

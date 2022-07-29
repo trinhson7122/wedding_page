@@ -36,7 +36,14 @@ class ProductController extends Controller
      */
     public function store(StoreProductRequest $request)
     {
-        //
+        $obj = new Product();
+        $obj->fill($request->validated());
+        $obj->save();
+        $arr = [
+            'status' => 'success',
+            'message' => 'Thêm sản phẩm thành công',
+        ];
+        return Response($arr);
     }
 
     /**
