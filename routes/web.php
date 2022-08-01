@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::redirect('/', '/admin');
 Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::get('/', [TypeCategoryProductController::class, 'index'])->name('index');
     Route::post('/store-type', [TypeController::class, 'store'])->name('store-type');
@@ -25,4 +25,5 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::post('/store-product', [ProductController::class, 'store'])->name('store-product');
     Route::put('/update-product/{product}', [ProductController::class, 'update'])->name('update-product');
     Route::delete('/destroy-product/{product}', [ProductController::class, 'destroy'])->name('destroy-product');
+    Route::get('/edit-product/{product}', [ProductController::class, 'edit'])->name('edit-product');
 });

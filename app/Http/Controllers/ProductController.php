@@ -66,7 +66,11 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $arr = [
+            'status' => 'success',
+            'message' => $product,
+        ];
+        return Response($arr);
     }
 
     /**

@@ -15,11 +15,9 @@
     {{-- <link href="{{ asset('/css/app-creative-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" /> --}}
     <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
     <style>
-        .error{
-            color: red;
-        }
         body{
-            overflow: scroll;
+            overflow-y: scroll;
+            overflow-x: hidden;
         }
     </style>
 </head>

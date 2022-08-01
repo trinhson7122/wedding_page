@@ -16,17 +16,11 @@ class TypeCategoryProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function __construct()
-    {
-        view()->share('temp', '');
-    }
     public function index()
     {
         $types = Type::query()->get();
         $categories = Category::query()->get();
-        $products = Product::with('category')->get();
-        //dd($products->where('id_category', '=', 1)->where('id_type', '=', 1));
-        //dd($categories->find(['id' => '6'])->first()->name);
+        $products = Product::query()->get();
         return view('admin.index', [
             'types' => $types,
             'categories' => $categories,

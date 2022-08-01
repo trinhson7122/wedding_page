@@ -1,4 +1,6 @@
 $(document).ready(function () {
+    const load = $('#load-page');
+    const loadmodal = $('load-modal');
     // add type
     $(document).on('click', '#add-type', function () {
         let form = $(this).parents('form');
@@ -12,6 +14,7 @@ $(document).ready(function () {
                 hideModal(modal);
                 $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
                 //update modal
+                load.load(location.href + " #load-page");
             },
             error: function (response) {
                 //hideModal(modal);
@@ -42,7 +45,6 @@ $(document).ready(function () {
     $(document).on('click', '#add-product', function () {
         let form = $(this).parents('form');
         let modal = $(this).parents('.modal');
-        let load = $('#load-page');
         $.ajax({
             type: "post",
             url: form.attr('action'),
@@ -62,7 +64,6 @@ $(document).ready(function () {
     //delete product
     $(document).on('click', '.destroy-product', function () {
         let check = confirm('Bạn có chắc muốn xóa không?');
-        let load = $(this).parents('#load-page');
         if (check) {
             let form = $(this).parents('form');
             $.ajax({
@@ -81,10 +82,19 @@ $(document).ready(function () {
             });
         }
     });
-
+    //
+    $('.btn-edit-product1').click(function (e) { 
+        let form = $(this).parents('form');
+        $.ajax({
+            type: "get",
+            url: form.attr('action'),
+            success: function (response) {
+                loadmodal.load(location.href + " #load-modal");
+            }
+        });
+    });
     //hide modal
     function hideModal(ModalObj) {
-        ModalObj.hide();
-        $('.modal-backdrop').remove();
+        ModalObj.click();
     }
 });
