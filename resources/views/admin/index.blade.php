@@ -9,65 +9,62 @@
     <ul class="nav nav-tabs">
         @foreach ($types as $type)
             <li class="nav-item">
-                <a class="nav-link active" data-bs-toggle="tab" href="#type_{{ $type->id }}">{{ $type->name }}</a>
+                <a class="nav-link @if ($loop->first) active @endif" data-bs-toggle="tab"
+                    href="#type_{{ $type->id }}">{{ $type->name }}</a>
             </li>
         @endforeach
     </ul>
 
     <!-- Tab panes -->
-    <div class="tab-content mt-1">
-        
-        <div class="tab-pane container active" id="ngoai_troi">
-            {{-- san khau --}}
-            <p>
-                <a class="btn btn-secondary w-15" data-toggle="collapse" href="#san_khau" role="button"
-                    aria-expanded="false" aria-controls="san_khau">
-                    Sân khấu
-                </a>
-            </p>
-            <div class="collapse" id="san_khau">
-                <div class="card card-body">
-                    <table class="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>Hạng mục</th>
-                                <th>Giá tiền</th>
-                                <th>Mô tả</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Sân khấu đơn lớp hoa lụa - Lá tươi</td>
-                                <td>12000000</td>
-                                <td>Khu vực làm lễ kết cấu đơn lớp kết hợp khung decor đơn giản. Trang trí Hoa lụa - lá tươi
-                                    theo mẫu có sẵn, phong cách hiện đại, tinh tế.
-                                    Tone màu theo concept</td>
-                            </tr>
-                            <tr>
-                                <td>Sân khấu đơn lớp hoa lụa - Lá tươi</td>
-                                <td>12000000</td>
-                                <td>Khu vực làm lễ kết cấu đơn lớp kết hợp khung decor đơn giản. Trang trí Hoa lụa - lá tươi
-                                    theo mẫu có sẵn, phong cách hiện đại, tinh tế.
-                                    Tone màu theo concept</td>
-                            </tr>
-                            <tr>
-                                <td>Sân khấu đơn lớp hoa lụa - Lá tươi</td>
-                                <td>12000000</td>
-                                <td>Khu vực làm lễ kết cấu đơn lớp kết hợp khung decor đơn giản. Trang trí Hoa lụa - lá tươi
-                                    theo mẫu có sẵn, phong cách hiện đại, tinh tế.
-                                    Tone màu theo concept</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+    <div class="tab-content mt-1" id="load-page">
+        @foreach ($types as $type)
+            <div class="tab-pane container @if ($loop->first) active @endif" id="type_{{ $type->id }}">
+                @foreach ($categories as $category)
+                    @if ($products->where('id_category', '=', $category->id)->where('id_type', '=', $type->id)->isNotEmpty())
+                        <p>
+                            <a class="btn btn-secondary w-15" data-toggle="collapse" href="#category_{{ $category->id }}"
+                                role="button" aria-expanded="false" aria-controls="category_{{ $category->id }}">
+                                {{ $category->name }}
+                            </a>
+                        </p>
+                        <div class="collapse" id="category_{{ $category->id }}">
+                            <div class="card card-body">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Tên sản phẩm</th>
+                                            <th>Giá tiền</th>
+                                            <th>Mô tả</th>
+                                            <th colspan="2">Hoạt động</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($products as $product)
+                                            @if ($product->id_type === $type->id && $product->id_category === $category->id)
+                                                <tr>
+                                                    <td>{{ $product->name }}</td>
+                                                    <td>{{ $product->price }}</td>
+                                                    <td>{{ $product->note }}</td>
+                                                    <td>
+                                                        <div class="btn btn-warning" data-toggle="modal" data-target="#update-type-modal">Sửa</div>
+                                                    </td>
+                                                    <td>
+                                                        <form action="{{ route('admin.destroy-product', ['product' => $product->id]) }}" method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn btn-danger destroy-product" data-toggle="modal" data-target="#destroy-type-modal" type="button">Xóa</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
             </div>
-            {{-- end san khau --}}
-        </div>
-        <div class="tab-pane container fade" id="khach_san">
-
-        </div>
-        <div class="tab-pane container fade" id="tu_gia">
-
-        </div>
+        @endforeach
     </div>
 @endsection

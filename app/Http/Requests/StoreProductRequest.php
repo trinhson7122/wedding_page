@@ -41,10 +41,10 @@ class StoreProductRequest extends FormRequest
             ],
             'price' => [
                 'required',
-                'regex:/^[1-9]{1}[0-9]+(\.[0-9]+)?$/',
+                'regex:/^(0)|([1-9]{1}[0-9]*(\.[0-9]+)?)$/',
             ],
             'note' => [
-                'string',
+                'nullable',
             ],
         ];
     }

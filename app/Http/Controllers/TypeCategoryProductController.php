@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Type;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Support\Facades\DB;
 
 class TypeCategoryProductController extends Controller
 {
@@ -15,14 +16,21 @@ class TypeCategoryProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        view()->share('temp', '');
+    }
     public function index()
     {
         $types = Type::query()->get();
         $categories = Category::query()->get();
-        //dd($categories->first());
+        $products = Product::with('category')->get();
+        //dd($products->where('id_category', '=', 1)->where('id_type', '=', 1));
+        //dd($categories->find(['id' => '6'])->first()->name);
         return view('admin.index', [
             'types' => $types,
             'categories' => $categories,
+            'products' => $products,
         ]);
     }
 

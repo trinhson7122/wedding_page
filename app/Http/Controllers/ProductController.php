@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use Illuminate\Http\Response;
 
 class ProductController extends Controller
 {
@@ -75,9 +76,15 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, Product $product)
+    public function update(UpdateProductRequest $request, $product)
     {
-        //
+        $obj = Product::query()->find($product);
+        $obj->update($request->validated());
+        $arr = [
+            'status' => 'success',
+            'message' => $obj->first(),
+        ];
+        return Response($arr);
     }
 
     /**
@@ -88,6 +95,12 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        $arr = [
+            'status' => 'success',
+            'message' => 'Xóa sản phẩm thành công',
+        ];
+        return Response($arr);
+        //return redirect()->route('admin.index');
     }
 }

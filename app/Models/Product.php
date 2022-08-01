@@ -15,4 +15,12 @@ class Product extends Model
         'id_category',
         'id_type',
     ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'id_category', 'id');
+    }
+    public function type()
+    {
+        return $this->belongsTo(Type::class, 'id_type', 'id');
+    }
 }

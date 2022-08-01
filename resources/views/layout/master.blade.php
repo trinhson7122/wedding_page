@@ -45,7 +45,7 @@
         </div>
     </div>
     @include('layout.modal')
-    @include('layout.rightsidebar')
+    {{-- @include('layout.rightsidebar') --}}
     <!-- bundle -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="{{ asset('/js/event.js') }}"></script>

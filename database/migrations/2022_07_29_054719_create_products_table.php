@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('id_type')->constrained('types');
             $table->string('name');
             $table->double('price');
-            $table->text('note');
+            $table->text('note')->nullable();
             $table->timestamps();
         });
     }

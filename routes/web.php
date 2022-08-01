@@ -23,4 +23,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function(){
     Route::post('/store-type', [TypeController::class, 'store'])->name('store-type');
     Route::post('/store-category', [CategoryController::class, 'store'])->name('store-category');
     Route::post('/store-product', [ProductController::class, 'store'])->name('store-product');
+    Route::put('/update-product/{product}', [ProductController::class, 'update'])->name('update-product');
+    Route::delete('/destroy-product/{product}', [ProductController::class, 'destroy'])->name('destroy-product');
 });
