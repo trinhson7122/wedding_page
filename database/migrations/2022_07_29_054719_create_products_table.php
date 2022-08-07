@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('id_category')->constrained('categories');
             $table->foreignId('id_type')->constrained('types');
             $table->string('name');
-            $table->double('price');
+            $table->float('price');
             $table->text('note')->nullable();
             $table->timestamps();
         });

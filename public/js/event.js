@@ -13,11 +13,10 @@ $(document).ready(function () {
             success: function (response) {
                 hideModal(modal);
                 $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
-                //update modal
                 load.load(location.href + " #load-page");
             },
             error: function (response) {
-                //hideModal(modal);
+                hideModal(modal);
                 $.NotificationApp.send("Thông báo", "Có lỗi sảy ra hoặc bạn chưa nhập đúng các trường dữ liệu", "top-center", "#fa6767", "error");
             }
         });
@@ -36,7 +35,7 @@ $(document).ready(function () {
                 $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
             },
             error: function (response) {
-                //hideModal(modal);
+                hideModal(modal);
                 $.NotificationApp.send("Thông báo", "Có lỗi sảy ra hoặc bạn chưa nhập đúng các trường dữ liệu", "top-center", "#fa6767", "error");
             }
         });
@@ -56,7 +55,7 @@ $(document).ready(function () {
                 load.load(location.href + " #load-page");
             },
             error: function (response) {
-                //hideModal(modal);
+                hideModal(modal);
                 $.NotificationApp.send("Thông báo", "Có lỗi sảy ra hoặc bạn chưa nhập đúng các trường dữ liệu", "top-center", "#fa6767", "error");
             }
         });
@@ -73,7 +72,6 @@ $(document).ready(function () {
                 dataType: 'json',
                 success: function (response) {
                     $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
-                    //location.reload();
                     load.load(location.href + " #load-page");
                 },
                 error: function (response) {
@@ -82,16 +80,47 @@ $(document).ready(function () {
             });
         }
     });
-    //
-    $('.btn-edit-product1').click(function (e) { 
-        let form = $(this).parents('form');
+    //show modal edit product
+    $(document).on('click', '.btn-edit-product', function (e) { 
+        let action = $(this).parents('form').attr('action');
         $.ajax({
             type: "get",
-            url: form.attr('action'),
+            url: action,
+            dataType: 'json',
             success: function (response) {
-                loadmodal.load(location.href + " #load-modal");
+                $('#update-product-modal form').attr('action', action);
+                $('#update-product-modal .product-name').val(response.message.name);
+                $('#update-product-modal .form-type select').val(response.message.id_type).change();
+                $('#update-product-modal .form-category select').val(response.message.id_category).change();
+                $('#update-product-modal .product-price').val(response.message.price);
+                $('#update-product-modal .product-note').val(response.message.note);
+            },
+            error: function (response)
+            {
+                $.NotificationApp.send("Thông báo", "Có lỗi sảy ra", "top-center", "#fa6767", "error");
             }
         });
+    });
+    //update product
+    $(document).on('click', '.update-product', function () {
+        let form = $(this).parents('form');
+        let modal = $(this).parents('.modal');
+        let action = form.attr('action').replace('edit', 'update');
+            $.ajax({
+                type: "post",
+                url: action,
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    hideModal(modal);
+                    $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+                    load.load(location.href + " #load-page");
+                },
+                error: function (response) {
+                    hideModal(modal);
+                    $.NotificationApp.send("Thông báo", "Có lỗi sảy ra", "top-center", "#fa6767", "error");
+                }
+            });
     });
     //hide modal
     function hideModal(ModalObj) {

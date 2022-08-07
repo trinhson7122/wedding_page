@@ -12,7 +12,6 @@
     <!-- App css -->
     <link href="{{ asset('/css/icons.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/css/app-creative.min.css') }}" rel="stylesheet" type="text/css" id="light-style" />
-    {{-- <link href="{{ asset('/css/app-creative-dark.min.css') }}" rel="stylesheet" type="text/css" id="dark-style" /> --}}
     <script src="{{ asset('/js/bootstrap.bundle.min.js') }}"></script>
     <style>
         body{
@@ -23,7 +22,7 @@
 </head>
 
 <body
-    data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false,"darkMode":false, "showRightSidebarOnStart": true}'>
+    data-layout-config='{"leftSideBarTheme":"dark","layoutBoxed":false, "leftSidebarCondensed":false, "leftSidebarScrollable":false}'>
     <!-- Begin page -->
     <div class="wrapper">
         @include('layout.leftsidebar')
@@ -42,7 +41,6 @@
 
         </div>
     </div>
-    @include('layout.modal')
     {{-- @include('layout.rightsidebar') --}}
     <!-- bundle -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

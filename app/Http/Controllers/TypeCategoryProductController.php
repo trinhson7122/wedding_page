@@ -21,7 +21,7 @@ class TypeCategoryProductController extends Controller
         $types = Type::query()->get();
         $categories = Category::query()->get();
         $products = Product::query()->get();
-        return view('admin.index', [
+        return view('admin.manage.product', [
             'types' => $types,
             'categories' => $categories,
             'products' => $products,
