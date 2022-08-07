@@ -26,8 +26,18 @@
                             <input class="form-control" type="text" required name="address">
                         </div>
 
+                        <div class="form-group">
+                            <label for="nametype">Tài khoản đăng nhập</label>
+                            <input class="form-control" type="text" placeholder="Có thể để trống" name="username">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="nametype">Mật khẩu</label>
+                            <input class="form-control" type="text" placeholder="Có thể để trống" name="password">
+                        </div>
+
                         <div class="form-group text-center">
-                            <button class="btn btn-primary" id="add-type" type="button">Thêm</button>
+                            <button class="btn btn-primary" id="add-account" type="button">Thêm</button>
                         </div>
 
                     </form>

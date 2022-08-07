@@ -34,5 +34,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         //account
         Route::get('khach-hang', [AccountController::class, 'index'])->name('customer-index');
         Route::post('/store-account', [AccountController::class, 'store'])->name('store-account');
+        Route::get('/edit-account/{account}', [AccountController::class, 'edit'])->name('edit-account');
+        Route::delete('/destroy-account/{account}', [AccountController::class, 'destroy'])->name('destroy-account');
+        Route::put('/update-account/{account}', [AccountController::class, 'update'])->name('update-account');
     });
 });

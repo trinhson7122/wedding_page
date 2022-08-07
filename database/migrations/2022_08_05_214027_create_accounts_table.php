@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('name', 50);
             $table->char('phone', 13);
             $table->string('address', 100)->nullable();
+            $table->string('username')->nullable();
+            $table->string('password')->nullable();
             $table->timestamps();
         });
     }

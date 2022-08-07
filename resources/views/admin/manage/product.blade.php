@@ -70,6 +70,6 @@
                 </div>
             @endforeach
         </div>
+        @include('layout.modal.admin.manage.product')
     </div>
-    @include('layout.modal.admin.manage.product')
 @endsection

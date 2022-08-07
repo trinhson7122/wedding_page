@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -14,7 +16,11 @@ class AccountController extends Controller
      */
     public function index()
     {
-        return view('admin.manage.customer');
+        $accounts = DB::table('accounts')->orderByDesc('id')->paginate(6);
+        //$accounts = Account::query()->paginate();
+        return view('admin.manage.customer', [
+            'accounts' => $accounts,
+        ]);
     }
 
     /**
@@ -38,6 +44,11 @@ class AccountController extends Controller
         $obj = new Account();
         $obj->fill($request->validated());
         $obj->save();
+        $arr = [
+            'status' => 'success',
+            'message' => 'Thêm khách hàng thành công',
+        ];
+        return Response($arr);
     }
 
     /**
@@ -83,5 +94,10 @@ class AccountController extends Controller
     public function destroy(Account $account)
     {
         $account->delete();
+        $arr = [
+            'status' => 'success',
+            'message' => 'Xóa khách hàng thành công',
+        ];
+        return Response($arr);
     }
 }
