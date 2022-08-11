@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
+use App\Models\Cart;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
@@ -17,9 +18,11 @@ class AccountController extends Controller
     public function index()
     {
         $accounts = DB::table('accounts')->orderByDesc('id')->paginate(6);
-        //$accounts = Account::query()->paginate();
+        $carts = Cart::query()->get();
+        //dd($carts->where('id', '=', 1)->count());
         return view('admin.manage.customer', [
             'accounts' => $accounts,
+            'carts' => $carts,
         ]);
     }
 
@@ -70,7 +73,11 @@ class AccountController extends Controller
      */
     public function edit(Account $account)
     {
-        //
+        $arr = [
+            'status' => 'success',
+            'message' => $account,
+        ];
+        return Response($arr);
     }
 
     /**
@@ -83,6 +90,11 @@ class AccountController extends Controller
     public function update(UpdateAccountRequest $request, Account $account)
     {
         $account->update($request->validated());
+        $arr = [
+            'status' => 'success',
+            'message' => 'Cập nhật khách hàng thành công',
+        ];
+        return Response($arr);
     }
 
     /**

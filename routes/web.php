@@ -37,5 +37,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
         Route::get('/edit-account/{account}', [AccountController::class, 'edit'])->name('edit-account');
         Route::delete('/destroy-account/{account}', [AccountController::class, 'destroy'])->name('destroy-account');
         Route::put('/update-account/{account}', [AccountController::class, 'update'])->name('update-account');
+        //checkout
+        Route::get('/bao-gia', [CartController::class, 'index'])->name('cart-index');
+        Route::post('/cart/store-cart', [CartController::class, 'store'])->name('store-cart');
     });
 });

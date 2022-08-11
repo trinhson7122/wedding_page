@@ -88,7 +88,7 @@
                                 </option>
                             @endforeach
                             </select>
-                            <input type="hidden" name="id_type" value="1" value="{{ $types->first()->id }}">
+                            <input type="hidden" name="id_type" value="1">
                         </div>
 
                         <div class="form-group form-category">
@@ -105,7 +105,7 @@
                                 </option>
                             @endforeach
                             </select>
-                            <input type="hidden" name="id_category" value="1" value="{{ $categories->first()->id }}">
+                            <input type="hidden" name="id_category" value="1">
                         </div>
 
                         <div class="form-group">

@@ -33,6 +33,7 @@ $(document).ready(function () {
             success: function (response) {
                 hideModal(modal);
                 $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+                load.load(location.href + " #load-page");
             },
             error: function (response) {
                 hideModal(modal);
@@ -163,6 +164,64 @@ $(document).ready(function () {
                 }
             });
         }
+    });
+    //show modal edit account
+    $(document).on('click', '.btn-edit-account', function (e) {
+        let action = $(this).parents('form').attr('action');
+        $.ajax({
+            type: "get",
+            url: action,
+            dataType: 'json',
+            success: function (response) {
+                $('#update-customer-modal form').attr('action', action);
+                $('#update-customer-modal .account-name input').val(response.message.name);
+                $('#update-customer-modal .account-phone input').val(response.message.phone);
+                $('#update-customer-modal .account-address input').val(response.message.address);
+                $('#update-customer-modal .account-username input').val(response.message.username);
+                $('#update-customer-modal .account-password input').val(response.message.password);
+            },
+            error: function (response) {
+                $.NotificationApp.send("Thông báo", "Có lỗi sảy ra", "top-center", "#fa6767", "error");
+            }
+        });
+    });
+    //update account
+    $(document).on('click', '#update-account', function () {
+        let form = $(this).parents('form');
+        let modal = $(this).parents('.modal');
+        let action = form.attr('action').replace('edit', 'update');
+        $.ajax({
+            type: "post",
+            url: action,
+            data: form.serialize(),
+            dataType: 'json',
+            success: function (response) {
+                hideModal(modal);
+                $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+                load.load(location.href + " #load-page");
+            },
+            error: function (response) {
+                hideModal(modal);
+                $.NotificationApp.send("Thông báo", "Có lỗi sảy ra", "top-center", "#fa6767", "error");
+            }
+        });
+    });
+    //add cart
+    $(document).on('click', '.btn-add-cart', function () {
+        let form = $(this).parents('form');
+        $.ajax({
+            type: "post",
+            url: form.attr('action'),
+            data: form.serialize(),
+            dataType: 'json',
+            success: function (response) {
+                $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+                load.load(location.href + " #load-page");
+            },
+            error: function (response) {
+                $.NotificationApp.send("Thông báo", "Có lỗi sảy ra hoặc bạn chưa nhập đúng các trường dữ liệu", "top-center", "#fa6767", "error");
+            }
+        });
     });
     //hide modal
     function hideModal(ModalObj) {

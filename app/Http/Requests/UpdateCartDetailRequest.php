@@ -2,11 +2,9 @@
 
 namespace App\Http\Requests;
 
-use App\Models\Account;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreCartRequest extends FormRequest
+class UpdateCartDetailRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -15,7 +13,7 @@ class StoreCartRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -26,11 +24,7 @@ class StoreCartRequest extends FormRequest
     public function rules()
     {
         return [
-            'id_account' => [
-                'required',
-                'numeric',
-                Rule::exists(Account::class, 'id'),
-            ],
+            //
         ];
     }
 }

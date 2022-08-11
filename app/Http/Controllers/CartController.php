@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use Illuminate\Http\Request as HttpRequest;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 
 class CartController extends Controller
 {
@@ -15,7 +19,11 @@ class CartController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $carts = Cart::query()->with('account')->get();
+        //$carts = DB::table('carts')->orderByDesc('id')->get();
+        return view('admin.manage.checkout', [
+            'carts' => $carts,
+        ]);
     }
 
     /**
@@ -27,7 +35,6 @@ class CartController extends Controller
     {
         //
     }
-
     /**
      * Store a newly created resource in storage.
      *
@@ -36,7 +43,14 @@ class CartController extends Controller
      */
     public function store(StoreCartRequest $request)
     {
-        //
+        $obj = new Cart();
+        $obj->fill($request->validated());
+        $obj->save();
+        $arr = [
+            'status' => 'success',
+            'message' => 'Thêm báo giá cho khách hàng thành công',
+        ];
+        return Response($arr);
     }
 
     /**

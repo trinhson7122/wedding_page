@@ -63,7 +63,7 @@
                         <a href="{{ route('admin.manage.product-index') }}">Quản lý sản phẩm báo giá</a>
                     </li>
                     <li>
-                        <a href="#">Quản lý báo giá</a>
+                        <a href="{{ route('admin.manage.cart-index') }}">Quản lý báo giá</a>
                     </li>
                     <li>
                         <a href="{{ route('admin.manage.customer-index') }}">Quản lý khách hàng</a>
