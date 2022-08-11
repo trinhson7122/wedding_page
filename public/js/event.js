@@ -1,4 +1,6 @@
+
 $(document).ready(function () {
+    let allowRequest = true;
     const load = $('#load-page');
     const loadmodal = $('load-modal');
     // add type
@@ -206,25 +208,39 @@ $(document).ready(function () {
             }
         });
     });
-    //add cart
+    //add cart on account
     $(document).on('click', '.btn-add-cart', function () {
-        let form = $(this).parents('form');
-        $.ajax({
-            type: "post",
-            url: form.attr('action'),
-            data: form.serialize(),
-            dataType: 'json',
-            success: function (response) {
-                $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
-                load.load(location.href + " #load-page");
-            },
-            error: function (response) {
-                $.NotificationApp.send("Thông báo", "Có lỗi sảy ra hoặc bạn chưa nhập đúng các trường dữ liệu", "top-center", "#fa6767", "error");
-            }
-        });
+        if (!allowRequest) {
+            $.NotificationApp.send("Thông báo", "Vui lòng không nhấn quá nhiều", "top-center", "#fa6767", "error");
+        }
+        else {
+            allowRequest = false;
+            let form = $(this).parents('form');
+            $.ajax({
+                type: "post",
+                url: form.attr('action'),
+                data: form.serialize(),
+                dataType: 'json',
+                success: function (response) {
+                    $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+                    load.load(location.href + " #load-page");
+                    antiSpam();
+                },
+                error: function (response) {
+                    $.NotificationApp.send("Thông báo", "Có lỗi sảy ra hoặc bạn chưa nhập đúng các trường dữ liệu", "top-center", "#fa6767", "error");
+                    antiSpam();
+                }
+            });
+        }
     });
     //hide modal
     function hideModal(ModalObj) {
         ModalObj.click();
+    }
+    function antiSpam()
+    {
+        setTimeout(() => {
+            allowRequest = true;
+        }, 3000);
     }
 });

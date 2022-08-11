@@ -15,4 +15,13 @@ class Account extends Model
         'username',
         'password',
     ];
+    public function countOfCart() : int
+    {
+        return Cart::query()->where('id_account', '=', $this->id)->count();
+    }
+    public function deleteRelated()
+    {
+        Cart::query()->where('id_account', '=', $this->id)->delete();
+        $this->delete();
+    }
 }

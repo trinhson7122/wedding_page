@@ -60,13 +60,13 @@
                 </a>
                 <ul class="side-nav-second-level" aria-expanded="false">
                     <li>
-                        <a href="{{ route('admin.manage.product-index') }}">Quản lý sản phẩm báo giá</a>
+                        <a href="{{ route('admin.product-index') }}">Quản lý sản phẩm báo giá</a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.manage.cart-index') }}">Quản lý báo giá</a>
+                        <a href="{{ route('admin.cart-index') }}">Quản lý báo giá</a>
                     </li>
                     <li>
-                        <a href="{{ route('admin.manage.customer-index') }}">Quản lý khách hàng</a>
+                        <a href="{{ route('admin.customer-index') }}">Quản lý khách hàng</a>
                     </li>
                 </ul>
             </li>

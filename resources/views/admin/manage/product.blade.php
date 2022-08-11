@@ -47,12 +47,12 @@
                                                         <td>{{ $product->formatPrice() }}</td>
                                                         <td>{{ $product->note }}</td>
                                                         <td>
-                                                            <form action="{{ route('admin.manage.edit-product', ['product' => $product->id]) }}" method="get">
+                                                            <form action="{{ route('admin.edit-product', ['product' => $product->id]) }}" method="get">
                                                                 <button type="button" class="btn btn-warning btn-edit-product" data-toggle="modal" data-target="#update-product-modal">Sửa</button>
                                                             </form>
                                                         </td>
                                                         <td>
-                                                            <form action="{{ route('admin.manage.destroy-product', ['product' => $product->id]) }}" method="post">
+                                                            <form action="{{ route('admin.destroy-product', ['product' => $product->id]) }}" method="post">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <button class="btn btn-danger destroy-product" data-toggle="modal" data-target="#destroy-type-modal" type="button">Xóa</button>

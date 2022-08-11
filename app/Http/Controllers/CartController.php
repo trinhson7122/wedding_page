@@ -19,8 +19,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::query()->with('account')->get();
-        //$carts = DB::table('carts')->orderByDesc('id')->get();
+        $carts = Cart::query()->orderBy('id', 'DESC')->with('account')->get();
         return view('admin.manage.checkout', [
             'carts' => $carts,
         ]);

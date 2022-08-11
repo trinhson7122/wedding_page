@@ -10,7 +10,7 @@
                         <h3>Thêm loại</h3>
                     </div>
                 
-                    <form class="pl-3 pr-3" action="{{ route('admin.manage.store-type') }}" method="post">
+                    <form class="pl-3 pr-3" action="{{ route('admin.store-type') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="nametype">Tên loại</label>
@@ -38,7 +38,7 @@
                         <h3>Thêm thể loại</h3>
                     </div>
                     
-                    <form class="pl-3 pr-3" action="{{ route('admin.manage.store-category') }}" method="get">
+                    <form class="pl-3 pr-3" action="{{ route('admin.store-category') }}" method="get">
                         @csrf
                         <div class="form-group">
                             <label for="namecategory">Tên thể loại</label>
@@ -66,7 +66,7 @@
                         <h3>Thêm sản phẩm</h3>
                     </div>
 
-                    <form class="pl-3 pr-3" action="{{ route('admin.manage.store-product') }}" method="post">
+                    <form class="pl-3 pr-3" action="{{ route('admin.store-product') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="nameproduct">Tên sản phẩm</label>
@@ -88,7 +88,13 @@
                                 </option>
                             @endforeach
                             </select>
-                            <input type="hidden" name="id_type" value="1">
+                            <input type="hidden" name="id_type" 
+                            @if ($types->count() > 0)
+                                value="{{ $types->first()->id }}"
+                            @else
+                                value="1"
+                            @endif
+                            >
                         </div>
 
                         <div class="form-group form-category">
@@ -105,7 +111,13 @@
                                 </option>
                             @endforeach
                             </select>
-                            <input type="hidden" name="id_category" value="1">
+                            <input type="hidden" name="id_category" 
+                            @if ($categories->count() > 0)
+                                value="{{ $categories->first()->id }}"
+                            @else
+                                value="1"
+                            @endif
+                            >
                         </div>
 
                         <div class="form-group">

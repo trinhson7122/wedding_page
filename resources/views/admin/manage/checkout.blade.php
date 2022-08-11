@@ -7,6 +7,7 @@
             <tr>
                 <th>#</th>
                 <th>Họ và tên</th>
+                <th>Số điện thoại</th>
                 <th>Tổng tiền</th>
                 <th>Tạo lúc</th>
                 <th colspan="2">Hoạt động</th>
@@ -17,6 +18,7 @@
                 <tr>
                     <td>{{ $cart->id }}</td>
                     <td>{{ $cart->account->name }}</td>
+                    <td>{{ $cart->account->phone }}</td>
                     <td>{{ $cart->sum_price }}</td>
                     <td>{{ $cart->created_at }}</td>
                     <td>

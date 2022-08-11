@@ -9,7 +9,7 @@
                         <h3>Thêm khách hàng</h3>
                     </div>
                 
-                    <form class="pl-3 pr-3" action="{{ route('admin.manage.store-account') }}" method="post">
+                    <form class="pl-3 pr-3" action="{{ route('admin.store-account') }}" method="post">
                         @csrf
                         <div class="form-group">
                             <label for="nametype">Tên khách hàng</label>

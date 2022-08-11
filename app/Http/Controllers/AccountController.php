@@ -17,12 +17,9 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $accounts = DB::table('accounts')->orderByDesc('id')->paginate(6);
-        $carts = Cart::query()->get();
-        //dd($carts->where('id', '=', 1)->count());
+        $accounts = Account::query()->orderByDesc('id')->paginate(6);
         return view('admin.manage.customer', [
             'accounts' => $accounts,
-            'carts' => $carts,
         ]);
     }
 
@@ -105,7 +102,8 @@ class AccountController extends Controller
      */
     public function destroy(Account $account)
     {
-        $account->delete();
+        $account->deleteRelated();
+        //$account->delete();
         $arr = [
             'status' => 'success',
             'message' => 'Xóa khách hàng thành công',
