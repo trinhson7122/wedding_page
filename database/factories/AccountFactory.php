@@ -17,7 +17,11 @@ class AccountFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'name' => fake()->name(),
+            'phone' => '0372238783',
+            'address' => fake()->address(),
+            'username' => fake()->userName(),
+            'password' => fake()->password(6, 10),
         ];
     }
 }

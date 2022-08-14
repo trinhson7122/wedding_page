@@ -21,9 +21,13 @@
                     <td>{{ $cart->account->phone }}</td>
                     <td>{{ $cart->sum_price }}</td>
                     <td>{{ $cart->created_at }}</td>
-                    <td>
+                    <td style="display: flex;flex-wrap:wrap">
                         <button class="btn btn-info">Xem</button>
-                        <button class="btn btn-danger">Xóa</button>
+                        <form class="form-inline" action="{{ route('admin.destroy-cart', ['cart' => $cart->id]) }}" method="post">
+                            @csrf
+                            @method('DELETE')
+                            <button class="btn btn-danger destroy-cart" type="button">Xóa</button>
+                        </form>
                     </td>
                 </tr>
             @endforeach

@@ -94,6 +94,10 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        //
+        $cart->delete();
+        return Response([
+            'status' => 'success',
+            'message' => 'Xóa báo giá thành công',
+        ]);
     }
 }
