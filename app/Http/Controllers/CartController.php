@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Http\Requests\StoreCartRequest;
 use App\Http\Requests\UpdateCartRequest;
+use App\Models\CartDetail;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Type;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -19,7 +23,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $carts = Cart::query()->orderBy('id', 'DESC')->with('account')->get();
+        $carts = Cart::query()->orderBy('id', 'DESC')->with('account')->paginate(6);
         return view('admin.manage.checkout', [
             'carts' => $carts,
         ]);
@@ -60,7 +64,18 @@ class CartController extends Controller
      */
     public function show(Cart $cart)
     {
-        //
+        $CartDetails = CartDetail::query()->where('id_cart', '=', $cart->id)->with('product')->get();
+        $types = Type::query()->get();
+        $categories = Category::query()->get();
+        $products = Product::query()->get();
+        //dd($CartDetails);
+        return view('admin.cart.view', [
+            'cartDetails' => $CartDetails,
+            'types' => $types,
+            'categories' => $categories,
+            'products' => $products,
+            'cart' => $cart,
+        ]);
     }
 
     /**
@@ -94,7 +109,7 @@ class CartController extends Controller
      */
     public function destroy(Cart $cart)
     {
-        $cart->delete();
+        $cart->deleteRelated();
         return Response([
             'status' => 'success',
             'message' => 'Xóa báo giá thành công',

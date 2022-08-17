@@ -21,7 +21,11 @@ class Account extends Model
     }
     public function deleteRelated()
     {
-        Cart::query()->where('id_account', '=', $this->id)->delete();
+        $carts = Cart::query()->where('id_account', '=', $this->id)->get();
+        foreach($carts as $cart)
+        {
+            $cart->deleteRelated();
+        }
         $this->delete();
     }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CartDetail;
 use App\Http\Requests\StoreCartDetailRequest;
 use App\Http\Requests\UpdateCartDetailRequest;
+use Illuminate\Http\Response;
 
 class CartDetailController extends Controller
 {
@@ -36,7 +37,13 @@ class CartDetailController extends Controller
      */
     public function store(StoreCartDetailRequest $request)
     {
-        //
+        $obj = new CartDetail();
+        $obj->fill($request->validated());
+        $obj->save();
+        return Response([
+            'status' => 'success',
+            'message' => 'Thêm sản phẩm thành công',
+        ]);
     }
 
     /**
@@ -70,7 +77,7 @@ class CartDetailController extends Controller
      */
     public function update(UpdateCartDetailRequest $request, CartDetail $cartDetail)
     {
-        //
+        
     }
 
     /**

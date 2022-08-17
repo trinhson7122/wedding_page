@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AccountController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CartDetailController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\TypeCategoryProductController;
@@ -36,8 +37,10 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/edit-account/{account}', [AccountController::class, 'edit'])->name('edit-account');
     Route::delete('/destroy-account/{account}', [AccountController::class, 'destroy'])->name('destroy-account');
     Route::put('/update-account/{account}', [AccountController::class, 'update'])->name('update-account');
-    //checkout
+    //cart
     Route::get('/bao-gia', [CartController::class, 'index'])->name('cart-index');
     Route::post('/store-cart', [CartController::class, 'store'])->name('store-cart');
     Route::delete('/destroy-cart/{cart}', [CartController::class, 'destroy'])->name('destroy-cart');
+    Route::get('/show-cart-detail-with-id-cart/{cart}', [CartController::class, 'show'])->name('show-cart');
+    Route::post('/store-cart-detail', [CartDetailController::class, 'store'])->name('store-cart-detail');
 });

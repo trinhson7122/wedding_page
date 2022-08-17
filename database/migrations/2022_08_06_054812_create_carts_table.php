@@ -17,7 +17,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('id_account')
             ->constrained('accounts')->onUpdate('cascade')->onUpdate('cascade');
-            $table->float('sum_price')->default(0);
             $table->timestamps();
         });
     }

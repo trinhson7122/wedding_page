@@ -256,6 +256,59 @@ $(document).ready(function () {
             });
         }
     });
+    //add product to cart detail
+    $(document).on('click', '.check-product', function(){
+        let form = $(this).parents('form');
+        if($(this).is(':checked'))
+        {
+            $.ajax({
+                type: "post",
+                url: form.attr('action'),
+                data: form.serialize(),
+                dataType: "json",
+                success: function (response) {
+                    let sum = $('#sum_price_cart');
+                    sum.load(sum.data('load') + ' #sum_price_cart');
+                    load.load(location.href + " #load-page");
+                    $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+                },
+                error: function (response) {
+                    $.NotificationApp.send("Thông báo", "Có lỗi sảy ra", "top-center", "#fa6767", "error");
+                }
+            });
+        }
+        // else
+        // {
+        //     //delete
+        //     let action = form.attr('action').replace('store', 'destroy');
+        //     let cartid = $(this).data('cartid');
+        //     $.ajax({
+        //         type: "post",
+        //         url: action + '/' + cartid,
+        //         data: form.serial,
+        //         dataType: "json",
+        //         success: function (response) {
+        //             $('#sum_price_cart').load(location.href + " #sum_price_cart");
+        //             $.NotificationApp.send("Thông báo", response.message, "top-center", "#42d29d", "success");
+        //         },
+        //         error: function (response) {
+        //             $.NotificationApp.send("Thông báo", "Có lỗi sảy ra", "top-center", "#fa6767", "error");
+        //         }
+        //     });
+        // }
+    });
+    //show modal cart detail
+    $(document).on('click', '.show-cart-detail', function(){
+        let form = $(this).parents('form');
+        $.ajax({
+            type: "get",
+            url: form.attr('action'),
+            dataType: "html",
+            success: function (response) {
+                $('#show-cart-detail-modal .modal-body').html(response);
+            }
+        });
+    });
     //hide modal
     function hideModal(ModalObj) {
         ModalObj.click();

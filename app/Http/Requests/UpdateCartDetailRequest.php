@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UpdateCartDetailRequest extends FormRequest
 {
@@ -24,7 +25,20 @@ class UpdateCartDetailRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id_cart' => [
+                'numeric',
+                'required',
+                Rule::exists(Cart::class, 'id'),
+            ],
+            'id_product' => [
+                'numeric',
+                'required',
+                Rule::exists(Product::class, 'id'),
+            ],
+            'amount' => [
+                'numeric',
+                'required',
+            ],
         ];
     }
 }

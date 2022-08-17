@@ -2,6 +2,8 @@
 
 namespace Database\Factories;
 
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +19,9 @@ class CartDetailFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'id_cart' => fake()->randomElement(Cart::pluck('id')),
+            'id_product' => fake()->randomElement(Product::pluck('id')),
+            'amount' => random_int(1, 5),
         ];
     }
 }
