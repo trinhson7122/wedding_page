@@ -12,9 +12,21 @@ class CartDetail extends Model
         'id_cart',
         'id_product',
         'amount',
+        'price',
     ];
+
     public function product()
     {
         return $this->belongsTo(Product::class, 'id_product', 'id');
+    }
+
+    public function sumPrice(): float
+    {
+        return $this->amount * $this->price;
+    }
+
+    public function formatPrice(float $price): string
+    {
+        return number_format($price);
     }
 }

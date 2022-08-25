@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreAccountRequest;
 use App\Http\Requests\UpdateAccountRequest;
 use App\Models\Account;
-use App\Models\Cart;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 
@@ -32,7 +31,7 @@ class AccountController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      *

@@ -31,6 +31,9 @@ class StoreCartRequest extends FormRequest
                 'numeric',
                 Rule::exists(Account::class, 'id'),
             ],
+            'sum_price' => [
+                'regex:/^(0)|([1-9]{1}[0-9]*(\.[0-9]+)?)$/',
+            ],
         ];
     }
 }

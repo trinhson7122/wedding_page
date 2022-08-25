@@ -5,7 +5,7 @@
     </div>
     <h4 class="float-right">
         Tổng tiền: 
-        <span class="sumprice" data-load="{{ route('admin.show-cart', ['cart' => $cart->id]) }}" id="sum_price_cart">{{ $cart->formatPrice() }}</span>
+        <span class="sumprice" data-load="{{ route('admin.show-cart', ['cart' => $cart->id]) }}" id="sum_price_cart">{{ $cart->formatPrice($cart->sumPrice(), 'VND') }}</span>
     </h4>
     <!-- Nav tabs -->
     <ul class="nav nav-tabs">
@@ -36,7 +36,7 @@
                                         <tr>
                                             <th>Lựa chọn</th>
                                             <th>Tên sản phẩm</th>
-                                            <th>Giá tiền</th>
+                                            <th colspan="2">Giá tiền</th>
                                             <th>Mô tả</th>
                                             <th colspan="3">Số lượng</th>
                                         </tr>
@@ -58,6 +58,7 @@
                                                                 </label>
                                                             </div>
                                                             <input type="hidden" name="id_cart" value="{{ $cart->id }}">
+                                                            <input type="hidden" class="price_product_{{ $product->id }}" name="price" value="{{ $product->price }}">
                                                             <input type="hidden" name="id_product" value="{{ $product->id }}">
                                                             <input type="hidden" class="amount-product-input-{{ $product->id }}" name="amount"
                                                             @if ($cartDetails->where('id_product', '=', $product->id)->isNotEmpty())
@@ -70,6 +71,9 @@
                                                     </td>
                                                     <td>{{ $product->name }}</td>
                                                     <td>{{ $product->formatPrice() }}</td>
+                                                    <td>
+                                                        <button class="btn btn-warning edit-price">Edit</button>
+                                                    </td>
                                                     <td>{{ $product->note }}</td>
                                                     <td>
                                                         {{-- giam --}}

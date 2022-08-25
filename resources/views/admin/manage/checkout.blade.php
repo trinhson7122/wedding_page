@@ -19,7 +19,7 @@
                     <td>{{ $cart->id }}</td>
                     <td>{{ $cart->account->name }}</td>
                     <td>{{ $cart->account->phone }}</td>
-                    <td>{{ $cart->formatPrice() }}</td>
+                    <td>{{ $cart->formatPrice($cart->sumPrice()) }}</td>
                     <td>{{ $cart->created_at }}</td>
                     <td>
                         <form action="{{ route('admin.show-cart', ['cart' => $cart->id]) }}" method="get">
@@ -34,7 +34,9 @@
                         </form>
                     </td>
                     <td>
-                        <div class="btn btn-warning">Xuất</div>
+                        <a target="_blank" href="{{ route('admin.export-pdf-cart-detail', ['cart' => $cart->id]) }}">
+                            <div class="btn btn-warning">Xuất PDF</div>
+                        </a> 
                     </td>
                 </tr>
             @endforeach

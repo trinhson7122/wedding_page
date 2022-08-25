@@ -9,6 +9,7 @@ use App\Models\CartDetail;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Type;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
@@ -76,6 +77,19 @@ class CartController extends Controller
             'products' => $products,
             'cart' => $cart,
         ]);
+    }
+
+    public function exportPDF(Cart $cart)
+    {
+        $cartDetails = CartDetail::query()->where('id_cart', '=', $cart->id)->with('product')->get();
+        $types = Type::query()->get();
+        $pdf = Pdf::loadView('admin.cart.checkout', [
+            'cartDetails' => $cartDetails,
+            'types' => $types,
+            'cart' => $cart,
+        ]);
+        $pdf->getDomPDF()->setPaper([0.0, 0.0, 841.89, 595.28]);
+        return $pdf->stream('Báo giá ' . $cart->account->name . '_' . $cart->id . '.pdf');
     }
 
     /**

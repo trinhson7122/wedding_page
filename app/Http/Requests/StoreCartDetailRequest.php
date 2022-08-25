@@ -41,6 +41,10 @@ class StoreCartDetailRequest extends FormRequest
                 'numeric',
                 'required',
             ],
+            'price' => [
+                'required',
+                'regex:/^(0)|([1-9]{1}[0-9]*(\.[0-9]+)?)$/',
+            ],
         ];
     }
 }

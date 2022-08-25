@@ -43,4 +43,6 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.'], function () {
     Route::delete('/destroy-cart/{cart}', [CartController::class, 'destroy'])->name('destroy-cart');
     Route::get('/show-cart-detail-with-id-cart/{cart}', [CartController::class, 'show'])->name('show-cart');
     Route::post('/store-cart-detail', [CartDetailController::class, 'store'])->name('store-cart-detail');
+    //pdf
+    Route::get('/cart-detail-pdf/{cart}', [CartController::class, 'exportPDF'])->name('export-pdf-cart-detail');
 });
