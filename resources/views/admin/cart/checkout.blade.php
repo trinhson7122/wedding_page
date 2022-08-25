@@ -43,6 +43,12 @@
         table{
             margin-bottom: 20px;
         }
+        .table-list{
+            width: 100%;
+        }
+        .table-end{
+            width: 40%;
+        }
         caption{
             border: 1px solid black;
             padding: 10px 0;
@@ -92,7 +98,7 @@
         <h2>Bảng phân bố chi phí các hạng mục decor</h2>
         @foreach ($types as $type)
             @if ($cart->hasType($type->id))
-                <table border="1" cellspacing="0">
+                <table border="1" cellspacing="0" class="table-list">
                     <caption>{{ $type->name }}</caption>
                     <thead>
                         <tr>
@@ -112,8 +118,8 @@
                                     <td>{{ $each->product->name }}</td>
                                     <td>{{ $each->product->note }}</td>
                                     <td align="center">{{ $each->amount }}</td>
-                                    <td align="center">{{ $each->formatPrice($each->product->price) }}</td>
-                                    <td align="center">{{ $each->formatPrice($each->sumPrice()) }}</td>
+                                    <td align="center">{{ formatMoney($each->product->price) }}</td>
+                                    <td align="center">{{ formatMoney($each->sumPrice()) }}</td>
                                 </tr>
                             @endif
                         @endforeach
@@ -121,13 +127,13 @@
                     <tfoot>
                         <tr align="center">
                             <td colspan="4">Tổng</td>
-                            <td colspan="2">{{ $cart->formatPrice($cart->sumTypePrice($type->id)) }}</td>
+                            <td colspan="2">{{ formatMoney($cart->sumTypePrice($type->id)) }}</td>
                         </tr>
                     </tfoot>
                 </table>
             @endif
         @endforeach
-        <table border="1" cellspacing="0">
+        <table border="1" cellspacing="0" class="table-end">
             <thead>
                 <tr>
                     <th colspan="2">Tổng hợp chi phí</th>
@@ -138,14 +144,14 @@
                     @if ($cart->hasType($type->id))
                         <tr>
                             <td>{{ $type->name }}</td>
-                            <td align="center">{{ $cart->formatPrice($cart->sumTypePrice($type->id)) }}</td>
+                            <td align="center">{{ formatMoney($cart->sumTypePrice($type->id)) }}</td>
                         </tr>
                     @endif
                 @endforeach
                 <tfoot>
                     <tr>
                         <td>TỔNG</td>
-                        <td align="center">{{ $cart->formatPrice($cart->sumPrice()) }}</td>
+                        <td align="center">{{ formatMoney($cart->sumPrice()) }}</td>
                     </tr>
                 </tfoot>
             </tbody>

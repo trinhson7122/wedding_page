@@ -19,7 +19,7 @@
                     <td>{{ $cart->id }}</td>
                     <td>{{ $cart->account->name }}</td>
                     <td>{{ $cart->account->phone }}</td>
-                    <td>{{ $cart->formatPrice($cart->sumPrice()) }}</td>
+                    <td>{{ formatMoney($cart->sumPrice(), 'VND') }}</td>
                     <td>{{ $cart->created_at }}</td>
                     <td>
                         <form action="{{ route('admin.show-cart', ['cart' => $cart->id]) }}" method="get">

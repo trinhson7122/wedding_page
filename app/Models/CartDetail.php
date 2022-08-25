@@ -24,9 +24,4 @@ class CartDetail extends Model
     {
         return $this->amount * $this->price;
     }
-
-    public function formatPrice(float $price): string
-    {
-        return number_format($price);
-    }
 }

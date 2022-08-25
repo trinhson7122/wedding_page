@@ -88,7 +88,7 @@ class CartController extends Controller
             'types' => $types,
             'cart' => $cart,
         ]);
-        $pdf->getDomPDF()->setPaper([0.0, 0.0, 841.89, 595.28]);
+        $pdf->getDomPDF()->setPaper([0.0, 0.0, 841.89, 595.28 * 2]);
         return $pdf->stream('Báo giá ' . $cart->account->name . '_' . $cart->id . '.pdf');
     }
 

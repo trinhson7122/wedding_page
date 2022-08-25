@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignId('id_cart')->constrained('carts')->onUpdate('cascade')->onUpdate('cascade');
             $table->foreignId('id_product')->constrained('products')->onUpdate('cascade')->onUpdate('cascade');
             $table->integer('amount', false, true);
+            $table->unsignedDouble('price');
             $table->timestamps();
         });
     }

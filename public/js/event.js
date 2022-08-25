@@ -258,9 +258,10 @@ $(document).ready(function () {
     });
     //add product to cart detail
     $(document).on('click', '.check-product', function(){
-        let form = $(this).parents('form');
+        let form = $(this).parents('tbody');
         if($(this).is(':checked'))
         {
+            console.log(form);
             $.ajax({
                 type: "post",
                 url: form.attr('action'),

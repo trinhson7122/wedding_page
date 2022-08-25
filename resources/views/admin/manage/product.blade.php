@@ -44,7 +44,7 @@
                                                 @if ($product->id_type === $type->id && $product->id_category === $category->id)
                                                     <tr>
                                                         <td>{{ $product->name }}</td>
-                                                        <td>{{ $product->formatPrice() }}</td>
+                                                        <td>{{ formatMoney($product->price, 'VND') }}</td>
                                                         <td>{{ $product->note }}</td>
                                                         <td>
                                                             <form action="{{ route('admin.edit-product', ['product' => $product->id]) }}" method="get">

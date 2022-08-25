@@ -16,10 +16,6 @@ class Cart extends Model
     {
         return $this->belongsTo(Account::class, 'id_account', 'id');
     }
-    public function formatPrice(float $price, string $location = ""): string
-    {
-        return number_format($price) . " $location";
-    }
     public function sumPrice(): float
     {
         $sum = 0;

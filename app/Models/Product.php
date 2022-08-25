@@ -15,10 +15,6 @@ class Product extends Model
         'id_category',
         'id_type',
     ];
-    private function format(string $format, float $price)
-    {
-        return number_format($price) . " $format";
-    }
     public function category()
     {
         return $this->belongsTo(Category::class, 'id_category', 'id');
@@ -26,9 +22,5 @@ class Product extends Model
     public function type()
     {
         return $this->belongsTo(Type::class, 'id_type', 'id');
-    }
-    public function formatPrice(): string
-    {
-        return $this->format('VND', $this->price);
     }
 }
